@@ -1,0 +1,10 @@
+{
+  "name": "media-browser",
+  "version": "0.0.1",
+  "description": "Stan's Media Browser",
+  "main": "index.html",
+  "window": {
+    "fullscreen": true,
+    "icon": "app/images/icon.png"
+  }
+}

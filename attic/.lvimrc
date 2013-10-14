@@ -1,0 +1,20 @@
+" Set up Syntastic to lint files on save.
+let g:syntastic_mode_map={ 'mode': 'active', 'active_filetypes': ['javascript', 'json'], 'passive_filetypes': [] }
+
+let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_jshint_conf='.jshintrc'
+
+let g:syntastic_json_checkers=['jsonlint']
+
+if ! exists('g:runCommandDirectory')
+  let g:runCommandDirectory=getcwd()
+endif
+
+function! s:RunNodeWebKit()
+  execute system('pkill -x nw')
+  execute system('LD_LIBRARY_PATH=' . shellescape(g:runCommandDirectory) . '/bin:' . shellescape($LD_LIBRARY_PATH) . 
+        \ ' bin/nw ' . shellescape(g:runCommandDirectory) . ' &')
+endfunction
+
+nnoremap <silent> <F5>      :w<CR>:call <SID>RunNodeWebKit()<CR>
+inoremap <silent> <F5> <Esc>:w<CR>:call <SID>RunNodeWebKit()<CR>a
