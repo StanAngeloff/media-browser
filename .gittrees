@@ -1,0 +1,9 @@
+[subtree "node_modules/xml2js"]
+	url = git@github.com:Leonidas-from-XIV/node-xml2js.git
+	path = node_modules/xml2js
+	branch = master
+
+[subtree "node_modules/sax"]
+	url = git@github.com:isaacs/sax-js.git
+	path = node_modules/sax
+	branch = master
