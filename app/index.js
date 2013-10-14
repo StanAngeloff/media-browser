@@ -6,17 +6,53 @@
   var fs = require('fs'),
       path = require('path');
 
+  var xml2js = require('xml2js');
+
   var app = angular.module('MediaBrowser', []);
 
   app.value('locations', ['/home/stan/Videos']);
 
-  function TVShow(name, location) {
-    this.name = name;
+  function image() {
+    var absolute = path.join.apply(path, arguments);
+    if (fs.existsSync(absolute)) {
+      return absolute;
+    }
+    return null;
+  }
+
+  function TVShow(options, location) {
+    for (var key in options) {
+      if (Object.prototype.hasOwnProperty.call(options, key)) {
+        this[key] = options[key];
+      }
+    }
+
     this.location = location;
+
+    this.images = {
+      folder: image(location, 'folder.jpg'),
+      fanart: image(location, 'fanart.jpg')
+    };
   }
 
   TVShow.fromFile = function(nfo, location, resume) {
-    resume(null, new TVShow('BOB', location));
+    fs.readFile(nfo, 'utf8', function(e, contents) {
+      if (e) {
+        return resume(e);
+      }
+      var parser = new xml2js.Parser({
+        trim: true,
+        explicitRoot: false,
+        explicitArray: false,
+        async: true
+      });
+      parser.parseString(contents, function(e, result) {
+        if (e) {
+          return resume(e);
+        }
+        resume(null, new TVShow(result, location));
+      });
+    });
   };
 
   function scan(location, resume) {
@@ -50,9 +86,14 @@
   }
 
   app.controller('VideoList', ['$scope', 'locations', function($scope, locations) {
+    $scope.shows = [];
+
     locations.forEach(function(location) {
       scan(location, function(e, show) {
-        console.log(e, show);
+        if (show) {
+          $scope.shows.push(show);
+          $scope.$digest();
+        }
       });
     });
   }]);

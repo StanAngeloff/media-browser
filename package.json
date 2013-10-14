@@ -5,6 +5,7 @@
   "main": "index.html",
   "window": {
     "fullscreen": true,
+    "toolbar": false,
     "icon": "app/images/icon.png"
   }
 }

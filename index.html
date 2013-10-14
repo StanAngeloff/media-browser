@@ -15,7 +15,16 @@
 </head>
 <body ng-controller="VideoList">
 
-<div>
+<div id=shows class=container>
+  <ul class=list-unstyled>
+    <li ng-repeat="show in shows">
+        <div class=thumbnail>
+          <a href="#">
+            <img ng-show="show.images.folder" ng-src="file://{{ show.images.folder }}" alt="{{ show.title }}">
+          </a>
+        </div>
+    </li>
+  </ul>
 </div>
 
 <script src="app/index.js"></script>
