@@ -10,19 +10,27 @@
 
 <script src="app/vendor/jquery-2.0.3.js"></script>
 <script src="app/vendor/angular-1.2.0-rc.2.js"></script>
+<script src="app/vendor/angular-ui-utils-0.0.4.js"></script>
 <script src="app/vendor/bootstrap-3.0.0/js/bootstrap.js"></script>
 
 </head>
-<body ng-controller="VideoList">
+<body ng-controller="VideoList" ui-keydown="{ down: 'selectNextShow($event)', up: 'selectPreviousShow($event)' }" tabindex=0>
 
 <div id=shows class=container>
   <ul class=list-unstyled>
-    <li ng-repeat="show in shows">
-        <div class=thumbnail>
-          <a href="#">
-            <img ng-show="show.images.folder" ng-src="file://{{ show.images.folder }}" alt="{{ show.title }}">
-          </a>
-        </div>
+    <li ng-repeat="show in shows | orderBy: 'title'" ng-class="{ 'no-episodes': (show.episodes.length < 1), 'selected': ($index == selectedShowIndex) }">
+      <div class=fanart ng-show="show.images.fanart">
+        <img ng-src="file://{{ show.images.fanart }}" alt="">
+      </div>
+      <div class=thumbnail>
+        <a href="#" tabindex="-1">
+          <img ng-show="show.images.folder" ng-src="file://{{ show.images.folder }}" alt="{{ show.title }}">
+          <div class=caption>
+            <h2>{{ show.title }}</h2>
+            <p class=episodes-length"><span ng-pluralize count="show.episodes.length" when="{'0': 'No episodes.', 'one': '1 episode.', 'other': '{} episodes.'}"></span></p>
+          </div>
+        </a>
+      </div>
     </li>
   </ul>
 </div>
