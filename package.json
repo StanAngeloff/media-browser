@@ -6,6 +6,6 @@
   "window": {
     "fullscreen": true,
     "toolbar": false,
-    "icon": "app/images/icon.png"
+    "icon": "assets/images/icon.png"
   }
 }

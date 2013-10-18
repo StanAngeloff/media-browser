@@ -5,13 +5,15 @@
 <meta charset=utf-8>
 <title>Stan's Media Browser</title>
 
-<link rel=stylesheet href="app/vendor/bootstrap-3.0.0/css/bootstrap.css">
-<link rel=stylesheet href="app/index.css">
+<link rel=stylesheet href="assets/vendor/bootstrap-3.0.0/css/bootstrap.css">
 
-<script src="app/vendor/jquery-2.0.3.js"></script>
-<script src="app/vendor/angular-1.2.0-rc.2.js"></script>
-<script src="app/vendor/angular-ui-utils-0.0.4.js"></script>
-<script src="app/vendor/bootstrap-3.0.0/js/bootstrap.js"></script>
+<link rel="stylesheet/less" type="text/css" href="app/styles/default.less">
+
+<script src="assets/vendor/jquery-2.0.3.js"></script>
+<script src="assets/vendor/angular-1.2.0-rc.2.js"></script>
+<script src="assets/vendor/angular-ui-utils-0.0.4.js"></script>
+<script src="assets/vendor/bootstrap-3.0.0/js/bootstrap.js"></script>
+<script src="assets/vendor/less-1.4.2.js" type="text/javascript"></script>
 
 </head>
 <body ng-controller="VideoList" ui-keydown="{ down: 'selectNextShow($event)', up: 'selectPreviousShow($event)' }" tabindex=0>
@@ -35,7 +37,7 @@
   </ul>
 </div>
 
-<script src="app/index.js"></script>
+<script src="app/media-browser.js"></script>
 
 </body>
 </html>
