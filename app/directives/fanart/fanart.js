@@ -6,7 +6,7 @@ angular.module('MediaBrowser.directives').directive('mediaFanart', [function() {
     transclude: true,
     templateUrl: 'app/directives/fanart/fanart.html',
     scope: {
-      shows: '=mediaPreload'
+      preload: '=mediaPreload'
     },
     require: ['^mediaShowsTrack'],
     link: function($scope, $element, $attributes, controllers) {
@@ -41,16 +41,13 @@ angular.module('MediaBrowser.directives').directive('mediaFanart', [function() {
       }
 
       var trackController = controllers[0];
-
-      $scope.$watch(trackController.getSelected, function(selected) {
-        if (selected) {
-          appendImage(selected);
-        }
+      trackController.on('selected', function(selected) {
+        appendImage(selected);
       });
 
-      $scope.$watch('shows', function(shows) {
-        if (shows) {
-          shows.forEach(function(show) {
+      $scope.$watch('preload', function(preload) {
+        if (preload) {
+          preload.forEach(function(show) {
             appendImage(show, /* hidden = */ true);
           });
         }

@@ -15,7 +15,7 @@ angular.module('MediaBrowser.directives').directive('mediaShowsList', ['$timeout
 
       var trackController = controllers[0];
       if (trackController) {
-        $scope.$watch(trackController.getSelected, function(selected) {
+        trackController.on('selected', function(selected) {
           $scope.selected = selected;
         });
       }
@@ -73,7 +73,7 @@ angular.module('MediaBrowser.directives').directive('mediaShowsList', ['$timeout
         if ($target.length) {
           var selected = findShowById($target.data('showId'));
           if (trackController) {
-            trackController.setSelected(selected);
+            trackController.updateSelected(selected);
           } else {
             $scope.selected = selected;
           }
@@ -83,13 +83,13 @@ angular.module('MediaBrowser.directives').directive('mediaShowsList', ['$timeout
         }
       };
 
-      var scrollDeferred;
+      var scrollPromise;
       $scope.$watch('selected', function() {
-        if (scrollDeferred) {
-          $timeout.cancel(scrollDeferred);
+        if (scrollPromise) {
+          $timeout.cancel(scrollPromise);
         }
-        scrollDeferred = $timeout(function() {
-          scrollDeferred = null;
+        scrollPromise = $timeout(function() {
+          scrollPromise = null;
 
           if ( ! $scope.selected) {
             return false;

@@ -8,10 +8,14 @@ angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['
   $scope.shows = [];
   $scope.isLoading = true;
 
+  function isShowFile(file) {
+    return (/tvshow\.nfo$/.test(file));
+  }
+
   Crawler.scan(mediaLocations).done(function(files) {
     var promises = [];
     files.forEach(function(file) {
-      if (/tvshow\.nfo$/.test(file)) {
+      if (isShowFile(file)) {
         var location = path.dirname(file);
         promises.push(ModelFactory.fromXmlFile('ShowModel', file, { location: location }));
       }
@@ -20,8 +24,7 @@ angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['
       var promises = shows.map(function(show) {
         var promises = [], deferred = Q.defer();
         files.forEach(function(file) {
-          var basename = path.basename(file);
-          if (file.indexOf(show.location) === 0 && basename.indexOf(show.title) === 0 && /\.nfo$/.test(file)) {
+          if (show.isEpisodeFile(file)) {
             promises.push(ModelFactory.fromXmlFile('EpisodeModel', file));
           }
         });

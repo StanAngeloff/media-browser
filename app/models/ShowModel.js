@@ -33,5 +33,10 @@ angular.module('MediaBrowser.models').factory('ShowModel', function() {
     nextId = nextId + 1;
   }
 
+  ShowModel.prototype.isEpisodeFile = function(file) {
+    var basename = path.basename(file);
+    return (file.indexOf(this.location) === 0 && basename.indexOf(this.title) === 0 && /\.nfo$/.test(file));
+  };
+
   return ShowModel;
 });
