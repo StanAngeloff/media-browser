@@ -6,6 +6,10 @@
   "eqeqeq": true,
   "esnext": true,
   "forin": true,
+  "globals": {
+    "$": false,
+    "angular": false
+  },
   "immed": true,
   "indent": 2,
   "latedef": true,

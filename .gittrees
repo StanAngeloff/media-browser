@@ -7,3 +7,8 @@
 	url = git@github.com:isaacs/sax-js.git
 	path = node_modules/sax
 	branch = master
+
+[subtree "node_modules/q"]
+	url = git@github.com:kriskowal/q.git
+	path = node_modules/q
+	branch = master

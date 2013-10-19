@@ -7,7 +7,7 @@
 
 <link rel=stylesheet href="assets/vendor/bootstrap-3.0.0/css/bootstrap.css">
 
-<link rel="stylesheet/less" type="text/css" href="app/styles/default.less">
+<link rel="stylesheet/less" type="text/css" href="assets/styles/default.less">
 
 <script src="assets/vendor/jquery-2.0.3.js"></script>
 <script src="assets/vendor/angular-1.2.0-rc.2.js"></script>
@@ -16,28 +16,40 @@
 <script src="assets/vendor/less-1.4.2.js" type="text/javascript"></script>
 
 </head>
-<body ng-controller="VideoList" ui-keydown="{ down: 'selectNextShow($event)', up: 'selectPreviousShow($event)' }" tabindex=0>
+<body>
 
-<div id=shows class=container>
-  <ul class=list-unstyled>
-    <li ng-repeat="show in shows | orderBy: 'title'" ng-class="{ 'no-episodes': (show.episodes.length < 1), 'selected': ($index == selectedShowIndex) }">
-      <div class=fanart ng-show="show.images.fanart">
-        <img ng-src="file://{{ show.images.fanart }}" alt="">
-      </div>
-      <div class=thumbnail>
-        <a href="#" tabindex="-1">
-          <img ng-show="show.images.folder" ng-src="file://{{ show.images.folder }}" alt="{{ show.title }}">
-          <div class=caption>
-            <h2>{{ show.title }}</h2>
-            <p class=episodes-length"><span ng-pluralize count="show.episodes.length" when="{'0': 'No episodes.', 'one': '1 episode.', 'other': '{} episodes.'}"></span></p>
+<section ng-controller="ShowMasterDetailCtrl">
+  <article id=show-master-detail class=container>
+    <div media-shows-track>
+      <div media-fanart
+        media-preload="shows">
+        <div class=row>
+          <div class=col-xs-4>
+            <div media-shows-list
+              media-shows="shows"
+              media-grab-focus="true"></div>
           </div>
-        </a>
+          <div class=col-xs-8>
+            <!-- XXX: Not implemented. -->
+          </div>
+        </div>
       </div>
-    </li>
-  </ul>
-</div>
+    </div>
+  </article>
+</section>
 
 <script src="app/media-browser.js"></script>
+
+<script src="app/configuration.js"></script>
+<script src="app/controllers/ShowMasterDetailCtrl.js"></script>
+<script src="app/directives/fanart/fanart.js"></script>
+<script src="app/directives/show-thumbnail/show-thumbnail.js"></script>
+<script src="app/directives/shows-list/shows-list.js"></script>
+<script src="app/directives/shows-track/shows-track.js"></script>
+<script src="app/models/EpisodeModel.js"></script>
+<script src="app/models/ShowModel.js"></script>
+<script src="app/services/CrawlerService.js"></script>
+<script src="app/services/ModelFactoryService.js"></script>
 
 </body>
 </html>
