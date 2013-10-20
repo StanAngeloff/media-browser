@@ -11,15 +11,13 @@ html, body {
 
 img { vertical-align: middle; }
 
+.row { overflow: hidden; }
+
 /**
  * Typography
  */
 
 @import 'fonts.less';
-
-body {
-  font-size: 16px;
-}
 
 body, h1, h2, h3, h4, h5, h6 {
   font-family: 'Archivo Narrow', sans-serif;
@@ -62,104 +60,117 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 
 /**
- * Shows (master-detail)
+ * Shows / Episodes
  */
 
 #show-master-detail {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+}
 
-  .row { overflow: hidden; }
+.shows-list {
+  position: relative;
+  float: left;
+  width: 30%;
+  height: 100vh;
+  overflow: hidden;
+  outline: none;
+  box-shadow:
+    10px 0 20px rgba(0, 0, 0, 0.225),
+    10px 0 10px rgba(0, 0, 0, 0.225),
+    10px 0 5px rgba(0, 0, 0, 0.125);
 
-  .shows-list {
-    position: relative;
-    float: left;
-    width: 30vw;
-    height: 100vh;
-    overflow-x: visible;
-    overflow-y: hidden;
-    outline: none;
-    box-shadow:
-      10px 0 20px rgba(0, 0, 0, 0.225),
-      10px 0 10px rgba(0, 0, 0, 0.225),
-      10px 0 5px rgba(0, 0, 0, 0.125);
+  .show {
+    transition: -webkit-transform 0.175s ease-in-out;
 
-    .show {
-      transition: -webkit-transform 0.175s ease-in-out;
-
-      .thumbnail img {
-        max-width: 100%;
-        transition: -webkit-filter 0.675s ease-in-out;
-      }
-
-      &.episodes-empty .thumbnail img {
-        -webkit-filter: grayscale(100%) brightness(75%) contrast(75%);
-      }
+    .thumbnail img {
+      max-width: 100%;
+      transition: -webkit-filter 0.675s ease-in-out;
     }
 
-    .show-selected {
-      -webkit-transform: scale(1.025);
-      position: relative;
-      z-index: 10;
-      box-shadow:
-        inset 1px 0 0 rgba(255, 255, 255, 0.125),
-        inset 0 1px 0 rgba(255, 255, 255, 0.125),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.125),
-
-        0 0 40px rgba(0, 0, 0, 0.425),
-        0 0 20px rgba(0, 0, 0, 0.325),
-        0 0 5px rgba(0, 0, 0, 0.125);
-    }
-
-    &:focus .show-selected {
-      box-shadow:
-        inset 1px 0 0 rgba(255, 255, 255, 0.125),
-        inset 0 1px 0 rgba(255, 255, 255, 0.125),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.125),
-
-        0 0 40px rgba(100, 175, 235, 0.825),
-        0 0 20px rgba(100, 175, 235, 0.725),
-        0 0 5px rgba(100, 175, 235, 0.625);
-    }
-
-    &:not(:focus) {
-      .show:not(.show-selected):not(.episodes-empty) .thumbnail img {
-        -webkit-filter: grayscale(90%);
-      }
+    &.episodes-empty .thumbnail img {
+      -webkit-filter: grayscale(100%) brightness(75%) contrast(75%);
     }
   }
 
-  .show-details {
+  .show-selected {
+    -webkit-transform: scale(1.025);
     position: relative;
-    float: right;
-    width: 70vw;
-    height: 100vh;
+    z-index: 10;
+    box-shadow:
+      inset 1px 0 0 rgba(255, 255, 255, 0.125),
+      inset 0 1px 0 rgba(255, 255, 255, 0.125),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.125),
+
+      0 0 40px rgba(0, 0, 0, 0.425),
+      0 0 20px rgba(0, 0, 0, 0.325),
+      0 0 5px rgba(0, 0, 0, 0.125);
+  }
+
+  &:focus .show-selected {
+    box-shadow:
+      inset 1px 0 0 rgba(255, 255, 255, 0.125),
+      inset 0 1px 0 rgba(255, 255, 255, 0.125),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.125),
+
+      0 0 40px rgba(100, 175, 235, 0.825),
+      0 0 20px rgba(100, 175, 235, 0.725),
+      0 0 5px rgba(100, 175, 235, 0.625);
+  }
+
+  &:not(:focus) {
+    .show:not(.show-selected):not(.episodes-empty) .thumbnail img {
+      -webkit-filter: grayscale(90%);
+    }
+  }
+}
+
+.show-details {
+  position: relative;
+  float: right;
+  width: 70%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.75);
+
+  .header {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20vh;
+
+    white-space: nowrap;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.75);
+    text-overflow: ellipsis;
 
-    .header {
-      padding: 2vmin 5vmin;
-      color: rgba(255, 255, 255, 0.95);
-      text-align: right;
-      text-shadow:
-        0 0 8px rgba(0, 0, 0, 0.75),
-        0 0 4px rgba(0, 0, 0, 0.5);
+    padding: 2vh 5vw;
+    text-align: right;
+    vertical-align: bottom;
 
-      h1 { font-size: 5vw; line-height: 5vw; padding: 0.25vmin; }
-      h2 { font-size: 2vw; line-height: 2vw; padding: 0.25vmin; }
+    h1 { font-size: 5vw; line-height: 5vw; color: rgba(255, 255, 255, 0.95); }
+    h2 { font-size: 3vw; line-height: 3vw; color: rgba(255, 255, 255, 0.85); }
 
-      span {
-        display: inline-block;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 1vmin;
-      }
+    h1, h2 {
+      display: inline-block;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 1vmin;
     }
   }
 }
 
 .episodes-list {
+  position: absolute;
+  top: 20vh;
+  left: 0;
+  right: 0;
+  max-height: 50vh;
+  // TODO: MUST figure out nasty overflow issues with shadows.
+  // overflow: hidden;
+
   list-style: none;
-  margin: 1vmin 5vmin;
+  margin: 1vh 2vw;
   background-color: rgba(0, 0, 0, 0.5);
   color: rgba(255, 255, 255, 0.9);
   outline: none;
@@ -170,6 +181,9 @@ body, h1, h2, h3, h4, h5, h6 {
 
   li {
     padding: 1vmin;
+    font-size: 2vw;
+
+    small { font-size: 1.5vw; }
   }
 
   .episode-selected {
@@ -196,5 +210,50 @@ body, h1, h2, h3, h4, h5, h6 {
       0 0 20px rgba(100, 175, 235, 0.825),
       0 0 10px rgba(100, 175, 235, 0.725),
       0 0 2px rgba(100, 175, 235, 0.625);
+  }
+}
+
+.episode-details {
+  position: absolute;
+  top: 70vh;
+  left: 0;
+  right: 0;
+  height: 30vh;
+
+  color: rgba(255, 255, 255, 0.95);
+  margin: 1vh 2vw 0;
+  font-size: 2vw;
+
+  .season-poster {
+    float: left;
+    margin-right: 1vw;
+  }
+
+  .season-poster img {
+    height: 25vh;
+    box-shadow:
+      0 0 10px rgba(0, 0, 0, 0.75),
+      0 0 5px rgba(0, 0, 0, 0.625),
+      0 0 2px rgba(0, 0, 0, 0.5);
+  }
+
+  dl { overflow: hidden; }
+
+  dl dt {
+    float: left;
+    clear: left;
+    margin-right: 0.5vw;
+    font-weight: bold;
+  }
+
+  dl dd { float: left; }
+
+  dt.plot { display: none; }
+  dt.plot + dd {
+    clear: left;
+    margin-top: 1vh;
+    padding-bottom: 1vh;
+    height: 21vh;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 90%, rgba(0, 0, 0, 0) 100%);
   }
 }

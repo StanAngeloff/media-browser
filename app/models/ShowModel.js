@@ -1,19 +1,10 @@
 angular.module('MediaBrowser.models').factory('ShowModel', function() {
   'use strict';
 
-  var fs = require('fs'),
-      path = require('path'),
+  var path = require('path'),
       utils = require('utils');
 
   var nextId = 1;
-
-  function getImageLocation() {
-    var absolute = path.join.apply(path, arguments);
-    if (fs.existsSync(absolute)) {
-      return absolute;
-    }
-    return null;
-  }
 
   function ShowModel(options) {
     utils.extend(this, {
@@ -25,8 +16,8 @@ angular.module('MediaBrowser.models').factory('ShowModel', function() {
 
     utils.extend(this, {
       images: {
-        folder: getImageLocation(this.location || '', 'folder.jpg'),
-        fanart: getImageLocation(this.location || '', 'fanart.jpg')
+        folder: path.join(this.location, 'folder.jpg'),
+        fanart: path.join(this.location, 'fanart.jpg')
       }
     });
 

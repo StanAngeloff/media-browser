@@ -7,7 +7,10 @@ angular.module('MediaBrowser.models').factory('EpisodeModel', function() {
 
   function EpisodeModel(options) {
     utils.extend(this, {
-      id: nextId
+      id: nextId,
+      title: null,
+      location: null,
+      showLocation: null
     }, options);
 
     nextId = nextId + 1;

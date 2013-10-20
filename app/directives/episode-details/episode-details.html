@@ -1,0 +1,13 @@
+<div class=episode-details>
+  <div class=row>
+    <div class=season-poster>
+      <img ng-src="file://{{ episode.showLocation }}/season{{ episode.season | leadingZeros:2 }}.tbn" alt="Season {{ episode.season }}">
+    </div>
+    <dl class=episode>
+      <dt class=aired>Aired:</dt>
+      <dd>{{ episode.aired | date:'EEE, MMM d, yyyy' }}</dd>
+      <dt class=plot>Plot:</dt>
+      <dd>{{ episode.plot }}</dd>
+    </dl>
+  </div>
+</div>

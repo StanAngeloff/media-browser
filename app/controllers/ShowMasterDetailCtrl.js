@@ -16,8 +16,9 @@ angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['
     var promises = [];
     files.forEach(function(file) {
       if (isShowFile(file)) {
-        var location = path.dirname(file);
-        promises.push(ModelFactory.fromXmlFile('ShowModel', file, { location: location }));
+        promises.push(ModelFactory.fromXmlFile('ShowModel', file, {
+          location: path.dirname(file)
+        }));
       }
     });
     Q.all(promises).done(function(shows) {
@@ -25,7 +26,10 @@ angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['
         var promises = [], deferred = Q.defer();
         files.forEach(function(file) {
           if (show.isEpisodeFile(file)) {
-            promises.push(ModelFactory.fromXmlFile('EpisodeModel', file));
+            promises.push(ModelFactory.fromXmlFile('EpisodeModel', file, {
+              location: file,
+              showLocation: show.location
+            }));
           }
         });
         Q.all(promises).done(function(episodes) {

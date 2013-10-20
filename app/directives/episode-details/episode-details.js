@@ -1,18 +1,16 @@
-angular.module('MediaBrowser.directives').directive('mediaShowDetails', [function() {
+angular.module('MediaBrowser.directives').directive('mediaEpisodeDetails', [function() {
   'use strict';
 
   return {
     restrict: 'EA',
-    templateUrl: 'app/directives/show-details/show-details.html',
-    scope: {
-      showEpisodes: '@mediaShowEpisodes'
-    },
+    templateUrl: 'app/directives/episode-details/episode-details.html',
+    scope: { },
     require: ['^mediaTrack'],
     link: function($scope, $element, $attributes, controllers) {
-      $scope.show = null;
+      $scope.episode = null;
       var trackController = controllers[0];
       trackController.on('selected', function(selected) {
-        $scope.show = selected;
+        $scope.episode = selected;
       });
     }
   };
