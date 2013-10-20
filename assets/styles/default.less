@@ -5,7 +5,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html, body {
-  background: #000;
+  background-color: rgb(0, 0, 0);
   overflow: hidden;
 }
 
@@ -15,8 +15,14 @@ img { vertical-align: middle; }
  * Typography
  */
 
+@import 'fonts.less';
+
 body {
   font-size: 16px;
+}
+
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Archivo Narrow', sans-serif;
 }
 
 /**
@@ -63,11 +69,15 @@ body {
   width: 100vw;
   height: 100vh;
 
+  .row { overflow: hidden; }
+
   .shows-list {
-    display: inline-block;
+    position: relative;
+    float: left;
     width: 30vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: visible;
+    overflow-y: hidden;
     outline: none;
     box-shadow:
       10px 0 20px rgba(0, 0, 0, 0.225),
@@ -77,7 +87,10 @@ body {
     .show {
       transition: -webkit-transform 0.175s ease-in-out;
 
-      .thumbnail img { max-width: 100%; }
+      .thumbnail img {
+        max-width: 100%;
+        transition: -webkit-filter 0.675s ease-in-out;
+      }
 
       &.episodes-empty .thumbnail img {
         -webkit-filter: grayscale(100%) brightness(75%) contrast(75%);
@@ -93,9 +106,95 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.125),
         inset 0 -1px 0 rgba(255, 255, 255, 0.125),
 
+        0 0 40px rgba(0, 0, 0, 0.425),
+        0 0 20px rgba(0, 0, 0, 0.325),
+        0 0 5px rgba(0, 0, 0, 0.125);
+    }
+
+    &:focus .show-selected {
+      box-shadow:
+        inset 1px 0 0 rgba(255, 255, 255, 0.125),
+        inset 0 1px 0 rgba(255, 255, 255, 0.125),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.125),
+
         0 0 40px rgba(100, 175, 235, 0.825),
         0 0 20px rgba(100, 175, 235, 0.725),
         0 0 5px rgba(100, 175, 235, 0.625);
     }
+
+    &:not(:focus) {
+      .show:not(.show-selected):not(.episodes-empty) .thumbnail img {
+        -webkit-filter: grayscale(90%);
+      }
+    }
+  }
+
+  .show-details {
+    position: relative;
+    float: right;
+    width: 70vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.75);
+
+    .header {
+      padding: 2vmin 5vmin;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: right;
+      text-shadow:
+        0 0 8px rgba(0, 0, 0, 0.75),
+        0 0 4px rgba(0, 0, 0, 0.5);
+
+      h1 { font-size: 5vw; line-height: 5vw; padding: 0.25vmin; }
+      h2 { font-size: 2vw; line-height: 2vw; padding: 0.25vmin; }
+
+      span {
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 1vmin;
+      }
+    }
+  }
+}
+
+.episodes-list {
+  list-style: none;
+  margin: 1vmin 5vmin;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  outline: none;
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.225),
+    0 0 10px rgba(0, 0, 0, 0.225),
+    0 0 5px rgba(0, 0, 0, 0.125);
+
+  li {
+    padding: 1vmin;
+  }
+
+  .episode-selected {
+    position: relative;
+    z-index: 10;
+    background-color: rgba(128, 128, 128, 0.725);
+    box-shadow:
+      inset 1px 0 0 rgba(255, 255, 255, 0.125),
+      inset 0 1px 0 rgba(255, 255, 255, 0.125),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.125),
+
+      0 0 20px rgba(160, 160, 160, 0.825),
+      0 0 10px rgba(160, 160, 160, 0.725),
+      0 0 2px rgba(160, 160, 160, 0.625);
+  }
+
+  &:focus .episode-selected {
+    background-color: rgba(100, 175, 235, 0.725);
+    box-shadow:
+      inset 1px 0 0 rgba(255, 255, 255, 0.125),
+      inset 0 1px 0 rgba(255, 255, 255, 0.125),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.125),
+
+      0 0 20px rgba(100, 175, 235, 0.825),
+      0 0 10px rgba(100, 175, 235, 0.725),
+      0 0 2px rgba(100, 175, 235, 0.625);
   }
 }

@@ -1,4 +1,4 @@
-angular.module('MediaBrowser.directives').directive('mediaShowsTrack', [function() {
+angular.module('MediaBrowser.directives').directive('mediaTrack', [function() {
   'use strict';
 
   return {

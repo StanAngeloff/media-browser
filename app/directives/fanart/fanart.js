@@ -8,7 +8,7 @@ angular.module('MediaBrowser.directives').directive('mediaFanart', [function() {
     scope: {
       preload: '=mediaPreload'
     },
-    require: ['^mediaShowsTrack'],
+    require: ['^mediaTrack'],
     link: function($scope, $element, $attributes, controllers) {
 
       var $fanart = $element.find('.media-fanart');

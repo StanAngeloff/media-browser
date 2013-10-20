@@ -16,19 +16,15 @@
 <body>
 
 <section ng-controller="ShowMasterDetailCtrl">
-  <article id=show-master-detail class=container>
-    <div media-shows-track>
+  <article id=show-master-detail>
+    <div media-track>
       <div media-fanart
         media-preload="shows">
         <div class=row>
-          <div class=col-xs-4>
-            <div media-shows-list
-              media-shows="shows"
-              media-grab-focus="true"></div>
-          </div>
-          <div class=col-xs-8>
-            <!-- XXX: Not implemented. -->
-          </div>
+          <div media-show-details></div>
+          <div media-shows-list
+            media-shows="shows"
+            media-grab-focus="true"></div>
         </div>
       </div>
     </div>
@@ -37,12 +33,16 @@
 
 <script src="app/media-browser.js"></script>
 
+<script src="app/common/directives/ListFactory.js"></script>
 <script src="app/configuration.js"></script>
 <script src="app/controllers/ShowMasterDetailCtrl.js"></script>
+<script src="app/directives/episodes-list/episodes-list.js"></script>
 <script src="app/directives/fanart/fanart.js"></script>
+<script src="app/directives/show-details/show-details.js"></script>
 <script src="app/directives/show-thumbnail/show-thumbnail.js"></script>
 <script src="app/directives/shows-list/shows-list.js"></script>
-<script src="app/directives/shows-track/shows-track.js"></script>
+<script src="app/directives/track/track.js"></script>
+<script src="app/filters/leading-zeros.js"></script>
 <script src="app/models/EpisodeModel.js"></script>
 <script src="app/models/ShowModel.js"></script>
 <script src="app/services/CrawlerService.js"></script>

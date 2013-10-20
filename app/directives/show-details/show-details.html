@@ -1,0 +1,14 @@
+<div class=show-details>
+  <header class=header>
+    <h1><span>{{ show.title }}</span></h1>
+    <h2 class=episodes-length><span ng-pluralize count="show.episodes.length" when="{'0': 'No episodes', 'one': '1 episode', 'other': '{} episodes'}"></span></h2>
+  </header>
+  <section>
+    <article id=episode-master-detail>
+      <div media-track>
+        <div media-episodes-list
+          media-episodes="show.episodes"></div>
+      </div>
+    </article>
+  </section>
+</div>
