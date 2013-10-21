@@ -1,4 +1,4 @@
-angular.module('MediaBrowser.directives').directive('mediaEpisodesList', ['ListFactory', function(ListFactory) {
+angular.module('MediaBrowser.directives').directive('mediaEpisodesList', ['ListFactory', 'PlayerService', function(ListFactory, PlayerService) {
   'use strict';
 
   return ListFactory.createDirective({
@@ -21,6 +21,11 @@ angular.module('MediaBrowser.directives').directive('mediaEpisodesList', ['ListF
           }
           $parent = $parent.parent();
         }
+      };
+
+      $scope.playSelected = function($event) {
+        $event.preventDefault();
+        PlayerService.playFile($scope.selected);
       };
 
       $scope.getClasses = function(episode) {

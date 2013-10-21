@@ -1,4 +1,4 @@
-<ol class=episodes-list ui-keydown="{ down: 'select($event, &quot;next&quot;)', up: 'select($event, &quot;prev&quot;)', left: 'focusShows($event)', backspace: 'focusShows($event)' }" tabindex=0>
+<ol class=episodes-list ui-keydown="{ down: 'select($event, &quot;next&quot;)', up: 'select($event, &quot;prev&quot;)', left: 'focusShows($event)', backspace: 'focusShows($event)', enter: 'playSelected($event)' }" tabindex=0>
   <li ng-repeat="episode in episodes | orderBy: 'aired'" ng-class="getClasses(episode)" data-model-id="{{ episode.id }}">
     <h3><small>{{ episode.season }}x{{ episode.episode | leadingZeros:2 }}</small> {{ episode.title }}</h3>
   </li>

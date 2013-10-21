@@ -1,2 +1,5 @@
 angular.module('MediaBrowser')
-  .value('mediaLocations', ['/home/stan/Videos']);
+  .value('configuration', {
+    mediaLocations: '/home/stan/Videos',
+    playerCommand: ['/usr/bin/smplayer', '-minigui', '-close-at-end', '-fullscreen', '%s']
+  });

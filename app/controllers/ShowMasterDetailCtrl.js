@@ -1,4 +1,4 @@
-angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['$scope', '$timeout', 'CrawlerService', 'ModelFactoryService', 'mediaLocations', function($scope, $timeout, Crawler, ModelFactory, mediaLocations) {
+angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['$scope', '$timeout', 'CrawlerService', 'ModelFactoryService', 'configuration', function($scope, $timeout, Crawler, ModelFactory, configuration) {
   'use strict';
 
   var path = require('path'),
@@ -12,7 +12,7 @@ angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['
     return (/tvshow\.nfo$/.test(file));
   }
 
-  Crawler.scan(mediaLocations).done(function(files) {
+  Crawler.scan(configuration.mediaLocations).done(function(files) {
     var promises = [];
     files.forEach(function(file) {
       if (isShowFile(file)) {
