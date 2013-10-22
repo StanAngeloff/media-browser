@@ -46,4 +46,9 @@ angular.module('MediaBrowser.controllers').controller('ShowMasterDetailCtrl', ['
       });
     });
   });
+
+  $scope.restart = function($event) {
+    $event.preventDefault();
+    location.reload();
+  }
 }]);

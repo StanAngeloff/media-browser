@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<section ng-controller="ShowMasterDetailCtrl">
+<section ng-controller="ShowMasterDetailCtrl" ng-class="{ 'loading': isLoading }" ui-keydown="{ 116: 'restart($event)' }">
   <article id=show-master-detail>
     <div media-track>
       <div media-fanart
