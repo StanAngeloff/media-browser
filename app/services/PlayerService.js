@@ -1,6 +1,9 @@
 angular.module('MediaBrowser.services').service('PlayerService', ['configuration', function(configuration) {
   'use strict';
 
+  var gui = require('nw.gui'),
+      window = gui.Window.get();
+
   var childProcess = require('child_process'),
       fs = require('fs'),
       path = require('path');
@@ -30,6 +33,9 @@ angular.module('MediaBrowser.services').service('PlayerService', ['configuration
         }
         return argument;
       });
+      if (configuration.restoreOnPlayerClose) {
+        window.hide();
+      }
       var child = childProcess.spawn(playerExecutable, playerArguments, {
         cwd: model.showLocation,
         detached: true,
@@ -38,6 +44,12 @@ angular.module('MediaBrowser.services').service('PlayerService', ['configuration
       child.on('error', function(e) {
         console.error('"%s %s" failed. %s', playerExecutable, playerArguments.join(' '), e.toString());
       });
+      if (configuration.restoreOnPlayerClose) {
+        child.on('close', function() {
+          window.show();
+          window.focus();
+        });
+      }
       child.unref();
       found = true;
     });
