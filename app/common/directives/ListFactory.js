@@ -42,6 +42,8 @@ angular.module('MediaBrowser.common').factory('ListFactory', ['$timeout', functi
         function findElementById(id) {
           if (id === ':first') {
             return $element.find('[data-model-id]').first();
+          } else if (id === ':last') {
+            return $element.find('[data-model-id]').last();
           } else {
             return $element.find('[data-model-id="' + id + '"]');
           }
