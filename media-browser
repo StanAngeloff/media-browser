@@ -1,0 +1,5 @@
+#!/bin/sh
+
+script_path="$( dirname "$( readlink -f "$0" )")"
+
+LD_LIBRARY_PATH="${script_path}/bin:${LD_LIBRARY_PATH}" "${script_path}/bin/nw" "$script_path"
