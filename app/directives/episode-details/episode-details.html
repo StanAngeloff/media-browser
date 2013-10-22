@@ -1,7 +1,8 @@
 <div class=episode-details>
   <div class=row>
-    <div class=season-poster>
-      <img ng-src="file://{{ episode.showLocation }}/season{{ episode.season | leadingZeros:2 }}.tbn" alt="Season {{ episode.season }}">
+    <div class=season-poster ng-switch="episode.season">
+      <img ng-switch-when="0" ng-src="file://{{ episode.showLocation }}/season-specials.tbn" alt="Specials">
+      <img ng-switch-default ng-src="file://{{ episode.showLocation }}/season{{ episode.season | leadingZeros:2 }}.tbn" alt="Season {{ episode.season }}">
     </div>
     <dl class=episode>
       <dt class=aired>Aired:</dt>
