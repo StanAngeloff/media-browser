@@ -5,7 +5,8 @@ angular.module('MediaBrowser.directives').directive('mediaShowsList', ['ListFact
     templateUrl: 'app/directives/shows-list/shows-list.html',
     scope: {
       grabFocus: '@mediaGrabFocus',
-      shows: '=mediaShows'
+      shows: '=mediaShows',
+      hideEmpty: '=mediaHideEmpty'
     },
     listElement: '.shows-list',
     modelsName: 'shows',
@@ -15,6 +16,10 @@ angular.module('MediaBrowser.directives').directive('mediaShowsList', ['ListFact
         return {
           'show-selected': ($scope.selected && $scope.selected.id === show.id)
         };
+      };
+
+      $scope.hideIfEmpty = function(show) {
+        return ( ! $scope.hideEmpty || show.episodes.length);
       };
 
       $scope.focusEpisodes = function($event) {

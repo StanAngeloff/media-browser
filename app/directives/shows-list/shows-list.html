@@ -1,7 +1,7 @@
 <div class=shows-list ui-keydown="{ home: 'select($event, &quot;:first&quot;)', up: 'select($event, &quot;prev&quot;)', down: 'select($event, &quot;next&quot;)', end: 'select($event, &quot;:last&quot;)', right: 'focusEpisodes($event)', enter: 'focusEpisodes($event)' }" tabindex=0>
   <div media-show-thumbnail
     media-show="show"
-    ng-repeat="show in shows | orderBy: 'title'"
+    ng-repeat="show in shows | filter: hideIfEmpty | orderBy: 'title'"
     ng-class="getClasses(show)"
     data-model-id="{{ show.id }}"></div>
 </div>
