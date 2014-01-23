@@ -1,11 +1,18 @@
 NW_VERSION := 0.7.5
 
 bin/nw: bin/libudev.so.0
-	@curl -'#' https://s3.amazonaws.com/node-webkit/v$(NW_VERSION)/node-webkit-v$(NW_VERSION)-$(shell uname | tr [:upper:] [:lower:])-$(shell uname -m | grep -q x86_64 && echo 'x64' || echo 'ia32').tar.gz | \
-		tar zxf - -C bin/ --strip-components=1
+	@curl -'#' https://s3.amazonaws.com/node-webkit/v$(NW_VERSION)/node-webkit-v$(NW_VERSION)-$(shell uname | tr [:upper:] [:lower:] | grep linux || echo 'osx')-$(shell uname -ms | grep -q 'Linux x86_64' && echo 'x64' || echo 'ia32').$(shell uname -s | grep -q Linux && echo 'tar.gz' || echo 'zip') | \
+		tar zxf - -C bin/ $(shell uname | grep -q Linux && echo '--strip-components=1')
+	@if ! uname | grep -q Linux; then \
+		@ln -s . bin/node-webkit.app/Contents/Resources/app.nw
+	fi
+
+bin/node-webkit.app: bin/nw
 
 bin/libudev.so.0: bin
-	ln -s /usr/lib/$(shell uname -i)-linux-gnu/libudev.so $@
+	@if uname | grep -q Linux; then \
+		@ln -s /usr/lib/$(shell uname -i)-linux-gnu/libudev.so $@ ; \
+	fi
 
 bin:
 	mkdir $@
